@@ -1,6 +1,6 @@
 ### AWS VPC Module
 
-This module creates following resources. We are using HA, we are getting first 2 AZ automatically.
+This module creates following resources. We are using High Availability, we are getting first 2 AZ automatically.
 * VPC
 * Internet Gateway with VPC association
 * 2 Public subnets in 1a and 1b
