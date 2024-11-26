@@ -52,7 +52,6 @@ resource "aws_subnet" "private" {
     }
   )
 }
-
 resource "aws_subnet" "database" {
   count = length(var.database_subnets_cidr)
   vpc_id     = aws_vpc.main.id
@@ -66,11 +65,16 @@ resource "aws_subnet" "database" {
     }
   )
 }
-
+resource "aws_db_subnet_group" "default" {
+  name = "${local.name}"
+  subnet_ids = aws_subnet.datadase[*].id 
+  tags = {
+    name = "${local.name}" 
+  }
+}
 resource "aws_eip" "eip" {
   domain           = "vpc"
 }
-
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public[0].id
